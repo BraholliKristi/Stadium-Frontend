@@ -1,0 +1,26 @@
+body,#Footer{
+    color:white;
+    overflow-x: hidden;
+}
+a{
+    text-decoration: none;
+    color:white;
+}
+.Main a{
+    color:black;
+}
+
+.Breadcrums,.NavigationBar,#Footer{
+    background-color: #1a202c;
+}
+.NavigationBar{
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+    line-height: 50px;
+    letter-spacing:inherit;
+}
+body{
+    font-family: Open-Sans;
+}
+
+
