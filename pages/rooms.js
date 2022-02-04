@@ -5,12 +5,12 @@ import Image from "next/image";
 import img1 from "../public/img/bck1.jpg";
 
 
-export default function Rooms() {
+export default function Rooms({Rooms}) {
     return (
         <>
             <NavBar/>
             <Image src={img1} width={1920}/>
-            <Breadcrums/>
+            <Breadcrums Title={"Rooms"}/>
             <Footer/>
         </>
     )

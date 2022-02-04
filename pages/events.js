@@ -3,7 +3,7 @@ import Footer from "./components/Footer";
 import Breadcrums from "./BreadCrums";
 import img1 from "../public/img/bck1.jpg";
 import Image from "next/image";
-import Main from "./components/Main";
+import Main from "./components/events/Main";
 import {fetchAllEvents, fetchEvents} from "../lib/api";
 
 export default function home(props) {
@@ -12,7 +12,7 @@ export default function home(props) {
         <>
             <NavBar/>
             <Image src={img1} width={1920}/>
-            <Breadcrums/>
+            <Breadcrums Title={"All Events"}/>
             <Main data={props.data}/>
             <Footer/>
         </>
