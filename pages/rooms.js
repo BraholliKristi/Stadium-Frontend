@@ -24,7 +24,7 @@ export default function Rooms({data}) {
                             </div>
                             <CarouselSlide image={Room}/>
                             <div className={"w-full relative bg-white font-bold text-2xl -mt-2 mb-5 p-5 rounded-b-2xl"}>
-                                <Link href={"/"}>
+                                <Link href={"/roomPrenotation/"+element.id}>
                                     <a>
                                         <button
                                             className={"absolute bg-green-500 text-sm p-3 rounded-2xl text-white border border-green-900 hover:bg-green-800 top-5 left-96"}>
@@ -48,7 +48,7 @@ export default function Rooms({data}) {
 
 export async function getServerSideProps() {
     const data = await fetchRooms();
-    console.log(data.length);
+    console.log(data);
     return {
         props: {
             data,
