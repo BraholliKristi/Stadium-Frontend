@@ -4,7 +4,7 @@ import Link from "next/link";
 export default function EventCards(props){
     return(
         <div className={"col-span-4 p-10"}>
-            <Link href={"prenotation/"+props.data.id} >
+            <Link href={"events/"+props.data.id} >
                 <a>
                     <div className="relative max-w-sm rounded overflow-hidden h-full shadow-lg hover:bg-red-200">
                         <Image className="w-full" width={380} height={200} src={img1} alt="Sunset in the mountains"/>

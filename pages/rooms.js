@@ -20,7 +20,7 @@ export default function Rooms({data}) {
                          className={"w-full grid relative text-left   grid-cols-4 bg-red-100"}>
                         <div className={(index%2==0)? "col-span-3 m-20 mt-0" :  "m-20 mt-0 col-start-2 col-span-3"}>
                             <div className={"text-left text-4xl py-5"}>
-                                Room Type
+                                {element.type}
                             </div>
                             <CarouselSlide image={Room}/>
                             <div className={"w-full relative bg-white font-bold text-2xl -mt-2 mb-5 p-5 rounded-b-2xl"}>
@@ -32,9 +32,9 @@ export default function Rooms({data}) {
                                         </button>
                                     </a>
                                 </Link>
-                                Room Name
+                                {element.name}
                                 <div className={"w-full bg-white font-bold text-lg -mt-2 mb-5 p-5 rounded-b-2xl"}>
-                                    Desription
+                                    {element.description}
                                 </div>
                             </div>
                         </div>

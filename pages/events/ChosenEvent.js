@@ -1,5 +1,6 @@
 import Image from "next/image";
 import img1 from "../../public/img/bck1.jpg";
+import fusha from "../../public/img/fusha.jpg";
 import Link from "next/link";
 export default function ChosenEvent(props){
     return(
@@ -25,7 +26,7 @@ export default function ChosenEvent(props){
                         </div>
                         <div className={" col-span-2 p-10 text-center font-bold text-xl"}>
                             Zones of Air Albania
-                            <Image src={img1} width={800} height={400}/>
+                            <Image src={fusha} width={800} height={400}/>
                         </div>
                         <div className={"flex col-start-4 col-span-1 grid grid-cols-1 justify-end items-end"}>
                             <div>
