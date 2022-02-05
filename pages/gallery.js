@@ -10,7 +10,7 @@ export default function Gallery() {
         <>
             <NavBar/>
             <Image src={img1} width={1920}/>
-            <Breadcrums/>
+            <Breadcrums Title={"Gallery"}/>
             <Footer/>
         </>
     )
