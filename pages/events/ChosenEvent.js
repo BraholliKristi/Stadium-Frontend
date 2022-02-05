@@ -37,7 +37,7 @@ export default function ChosenEvent(props){
          })
         console.log(response)
          const data=await response.json();
-         console.log(data);
+         alert(data.message);
     }
     return(
         <div className={"col-span-12 p-10"}>
@@ -64,12 +64,12 @@ export default function ChosenEvent(props){
                             Zones of Air Albania
                             <Image src={fusha} width={800} height={400}/>
                         </div>
-                        <div className={"flex col-start-4 col-span-1 grid grid-cols-1 justify-end items-end"}>
+                        <div className={"flex col-start-4 col-span-1 grid grid-cols-1 justify-end items-center"}>
                             <div>
                                 Select Zone:
                                 <select  onChange={(e) => {
                                     HandleChooseZone(e.target.value);
-                                }} id="zone-select" className={"mx-auto h-10 w-full text-xl border p-2"}>
+                                }} id="zone-select" className={"mx-auto h-10 w-full text-xl border p-1"}>
                                     {Zones.map((element,index)=>{
                                       return(  <option key={index} value={element}>{element}</option>);
                                     })}

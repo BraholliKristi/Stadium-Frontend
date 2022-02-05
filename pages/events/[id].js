@@ -9,7 +9,7 @@ function Details({data, seatsAvailable,id,Zones}){
     return(
         <>
             <NavBar/>
-            <Image src={"/img/"+data[0].carousel_image_path} width={1920} height={400}/>
+            <Image src={"/img/"+data[0].carousel_image_path} width={1920} height={900}/>
             <Breadcrums/>
             <Main data={data} eventId={id} Zones={Zones} AvailableSeats={seatsAvailable}/>
             <Footer/>

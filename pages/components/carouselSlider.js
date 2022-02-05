@@ -6,8 +6,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-import bck1 from "../../public/img/bck1.jpg"
 
+import bck1 from "/public/img/bck1.jpg";
 // import required modules
 import { Pagination, Navigation } from "swiper";
 import Image from "next/image";
@@ -22,8 +22,16 @@ export default function CarouselSlide(props) {
                 modules={[Pagination, Navigation]}
                 className="mySwiper"
             >
-                <SwiperSlide><Image src={props.image} width={1920} height={500}/></SwiperSlide>
-                <SwiperSlide><Image src={props.image} width={1920} height={500}/></SwiperSlide>
+                {props.image.map((roomImage)=>{
+                    console.log("/public/img/"+roomImage)
+                    return(
+                        <SwiperSlide><Image src={"/img/"+roomImage} width={1920} height={800}/></SwiperSlide>
+
+                    )
+
+                })}
+
+
             </Swiper>
         </>
     );
