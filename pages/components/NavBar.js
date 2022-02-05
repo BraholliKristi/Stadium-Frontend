@@ -25,6 +25,9 @@ export default function NavBar(){
                     <div className={"col-span-3 text-center border-b-2 mx-10 border-transparent hover:hover:border-b-red-700"}>
                     <Link href={"/gallery"}>Gallery</Link>
                     </div>
+                    <div className={"col-span-3 text-center border-b-2 mx-10 border-transparent hover:hover:border-b-red-700"}>
+                        <Link href={"/Login"}>Login</Link>
+                    </div>
                 </div>
             </div>
     )
