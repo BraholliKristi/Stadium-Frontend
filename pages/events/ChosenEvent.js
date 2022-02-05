@@ -1,12 +1,12 @@
 import Image from "next/image";
-import img1 from "../../public/img/bck1.jpg";
 import Link from "next/link";
+
 export default function ChosenEvent(props){
     return(
         <div className={"col-span-12 p-10"}>
                     <div className={"w-full shadow-2xl grid grid-cols-4 border group-hover:border-2"}>
                         <div className="max-w-sm rounded border-r border-black overflow-hidden shadow-lg hover:shadow-red-200">
-                            <Image className="w-full" width={380} height={200} src={img1} alt="Sunset in the mountains"/>
+                            <Image className="w-full" width={380} height={200} src={"/img/"+props.data.image_path} alt="Sunset in the mountains"/>
                             <div className="px-6 py-4">
                                 <div className="font-bold text-xl mb-2">{props.data.name}</div>
                                 <div className="text-xl">
@@ -25,27 +25,19 @@ export default function ChosenEvent(props){
                         </div>
                         <div className={" col-span-2 p-10 text-center font-bold text-xl"}>
                             Zones of Air Albania
-                            <Image src={img1} width={800} height={400}/>
+                            <Image src={"/img/fusha.jpg"} width={800} height={400}/>
                         </div>
                         <div className={"flex col-start-4 col-span-1 grid grid-cols-1 justify-end items-end"}>
                             <div>
                                 Select Zone:
-                                <select className={"mx-auto h-10 w-full text-xl border p-2"}>
-                                    <option>
-                                        A
-                                    </option>
+                                <select id="zone-select" className={"mx-auto h-10 w-full text-xl border p-2"}>
+                                    <option value={""} selected={"selected"}>Select Zone</option>
                                 </select>
                             </div>
                             <div>
                                 Select Seat:
-                                <select className={"mx-auto h-10 w-full text-xl border p-1"}>
-                                    {/*props.seats.map((seat,index)=>{
-                                        return(
-                                            <option key={index}>
-                                                {seat.chair_number}
-                                            </option>
-                                        )
-                                    })*/}
+                                <select id="seat-select" className={"mx-auto h-10 w-full text-xl border p-1"}>
+                                    <option value={""} selected={"selected"}>Select Seat</option>
                                 </select>
                             </div>
                            <div className={"flex justify-end text-end"}>

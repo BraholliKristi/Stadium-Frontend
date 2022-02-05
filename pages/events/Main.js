@@ -20,7 +20,7 @@ export default function Main(props){
 
                 {props.data.map((event)=>{
                     return(
-                        <ChosenEvent data={event} /*seats={props.AvaliableSeats}*//>
+                        <ChosenEvent data={event} seats={props.AvailableSeats}/>
                     );
                 })}
 

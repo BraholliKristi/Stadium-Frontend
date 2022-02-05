@@ -1,6 +1,5 @@
 import {Link} from "react-router-dom";
 import {Card, Col} from "react-bootstrap";
-import CardImage from "../../public/img/bck1.jpg";
 
 
 export default function EventCard({data}){
@@ -8,7 +7,7 @@ export default function EventCard({data}){
         <Link to={"/tickets/"+data.id}>
             <Col>
                 <Card>
-                    <Card.Img variant="top" src={CardImage} />
+                    <Card.Img variant="top" src={"/img/"+data.image_path} />
                     <Card.Body >
                     <Card.Text>
                            {data.date}

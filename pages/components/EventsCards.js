@@ -1,5 +1,4 @@
 import Image from "next/image";
-import img1 from "../../public/img/bck1.jpg";
 import Link from "next/link";
 export default function EventCards(props){
     return(
@@ -7,7 +6,7 @@ export default function EventCards(props){
             <Link href={"events/"+props.data.id} >
                <a>
                        <div className="max-w-sm rounded overflow-hidden shadow-lg">
-                           <Image className="w-full" width={380} height={200} src={img1} alt="Sunset in the mountains"/>
+                           <Image className="w-full" width={380} height={200} src={"/img/"+props.data.image_path} alt="Sunset in the mountains"/>
                            <div className="px-6 py-4">
                                <div className="font-bold text-xl mb-2">{props.data.name}</div>
                                <div className="text-xl">

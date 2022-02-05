@@ -1,18 +1,17 @@
 import NavBar from "../components/NavBar";
 import Image from "next/image";
-import img1 from "../../public/img/bck1.jpg";
 import Breadcrums from "../BreadCrums";
 import Main from "./Main";
 import Footer from "../components/Footer";
-import {fetchAvaliableSeats, fetchEvent} from "../../lib/api";
+import {fetchAvailableSeats, fetchEvent} from "../../lib/api";
 
-function Details({data/*, seatsAvaliable*/}){
+function Details({data, seatsAvailable}){
     return(
         <>
             <NavBar/>
-            <Image src={img1} width={1920}/>
+            <Image src={"/img/"+data[0].carousel_image_path} width={1920} height={400}/>
             <Breadcrums/>
-            <Main data={data} /*AvaliableSeats={seatsAvaliable}*//>
+            <Main data={data} AvailableSeats={seatsAvailable}/>
             <Footer/>
         </>
     )
@@ -22,13 +21,12 @@ export async function getServerSideProps(context) {
     console.log(context.query.id);
     let id=context.query.id;
     const data=await fetchEvent(id);
-    const seatsAvaliable=await fetchAvaliableSeats(id);
-    console.log(seatsAvaliable);
+    const seatsAvailable=await fetchAvailableSeats(id);
     return {
         props: {
             data,
-            //seatsAvaliable
+            seatsAvailable
         }
     };
-    }
+}
 export default Details;

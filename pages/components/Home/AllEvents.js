@@ -13,7 +13,7 @@ export default function AllEvents(){
                 <Row xs={1} md={3} className="g-5 px-5 py-4  text-black Main">
                     {ApiData.map(( element ,index )=>{
                        return(
-                           <EventCard key ={index} data={element}/>
+                           <EventCard key={index} data={element}/>
                        )
                     })
                    }
