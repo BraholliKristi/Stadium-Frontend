@@ -13,7 +13,7 @@ export default function NavBar(){
                    </Link>
                 </div>
                 <div className={"col-span-8 grid grid-cols-12"}>
-                    <div className={"col-span-3 text-center border-b-2 mx-10 border-transparent hover:hover:border-b-red-700"}>
+                    <div className={"col-start-4 col-span-3 text-center border-b-2 mx-10 border-transparent hover:hover:border-b-red-700"}>
                         <Link className={"hover:bg-red-700"} href={"/"}>Home</Link>
                     </div>
                   <div className={"col-span-3  text-center border-b-2 mx-10 border-transparent hover:hover:border-b-red-700"}>
@@ -21,9 +21,6 @@ export default function NavBar(){
                    </div>
                     <div className={"col-span-3 text-center border-b-2 mx-10 border-transparent hover:hover:border-b-red-700"}>
                     <Link href={"/rooms"}>Rooms</Link>
-                    </div>
-                    <div className={"col-span-3 text-center border-b-2 mx-10 border-transparent hover:hover:border-b-red-700"}>
-                        <Link href={"/Login"}>Login</Link>
                     </div>
                 </div>
             </div>

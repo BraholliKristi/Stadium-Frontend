@@ -5,12 +5,14 @@ import Main from "./components/Main";
 import fetchZones, {fetchAvailableSeats, fetchEvent, fetchEvents} from "../lib/api";
 import CarouselSlide from "./components/carouselSlider";
 import bck1 from "../public/img/bck1.jpg";
+import VideoHeader from "./components/VideoHeader";
 export default function home(props) {
 console.log(props.data.length)
+    let Bcks=['bck1.jpg','bck2.jpg','bck3.jpg'];
   return (
       <>
         <NavBar/>
-          <CarouselSlide image={bck1}/>
+          <VideoHeader url={"/video/bckIntro.mp4"} title={"WELCOME TO AIR ALBANIA"}/>
           <Breadcrums Title={"Leatest Events"}/>
           <Main data={props.data} />
         <Footer/>
