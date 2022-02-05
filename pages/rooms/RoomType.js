@@ -9,7 +9,7 @@ export default function RoomType({type,data,index,ImagesForType}){
                 <div className={"text-left text-4xl py-5"}>
                     {type}
                 </div>
-                <CarouselSlide image={ImagesForType} />
+                <CarouselSlide data={data} image={ImagesForType} />
                 <div className={"w-full relative bg-white font-bold text-2xl -mt-2 mb-5 p-5 rounded-b-2xl"}>
                     <Link href={"/roomPrenotation/"+type}>
                         <a>

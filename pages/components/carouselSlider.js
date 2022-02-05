@@ -7,11 +7,30 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-import bck1 from "/public/img/bck1.jpg";
 // import required modules
 import { Pagination, Navigation } from "swiper";
 import Image from "next/image";
+import {image} from "tailwindcss/lib/util/dataTypes";
+
 export default function CarouselSlide(props) {
+    if (props.image) {
+        image = props.image.map((roomImage)=>{
+            console.log("/public/img/"+roomImage)
+            return(
+                <SwiperSlide><Image src={"/img/"+roomImage} width={1920} height={800}/></SwiperSlide>
+
+            )
+        });
+    }
+    else {
+        image = props.data.map((element)=>{
+            console.log("/public/img/"+element.image_path)
+            return(
+                <SwiperSlide><Image src={"/img/"+element.image_path} width={1920} height={800}/></SwiperSlide>
+            )
+        });
+    }
+    console.log(props.data);
     return (
         <>
             <Swiper
@@ -22,16 +41,7 @@ export default function CarouselSlide(props) {
                 modules={[Pagination, Navigation]}
                 className="mySwiper"
             >
-                {props.image.map((roomImage)=>{
-                    console.log("/public/img/"+roomImage)
-                    return(
-                        <SwiperSlide><Image src={"/img/"+roomImage} width={1920} height={800}/></SwiperSlide>
-
-                    )
-
-                })}
-
-
+                {image}
             </Swiper>
         </>
     );
