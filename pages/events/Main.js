@@ -4,7 +4,6 @@ import img1 from "../../public/img/bck1.jpg";
 import ChosenEvent from "./ChosenEvent";
 
 export default function Main(props){
-    console.log(props.data.length)
     return(
         <>
             <div className={"grid grid-cols-12"}>
@@ -18,9 +17,9 @@ export default function Main(props){
                     </span>
                 </h2>
 
-                {props.data.map((event)=>{
+                {props.data.map((event,index)=>{
                     return(
-                        <ChosenEvent data={event} seats={props.AvailableSeats}/>
+                        <ChosenEvent key={index} Zones={props.Zones} id={props.eventId} data={event} seats={props.AvailableSeats}/>
                     );
                 })}
 

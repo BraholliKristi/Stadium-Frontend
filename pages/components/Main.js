@@ -12,7 +12,7 @@ export default function Main(props){
                 </h2>
                 {props.data.map((event)=>{
                     return(
-                        <EventCards data={event}/>
+                        <EventCards  data={event}/>
                     );
                 })}
 

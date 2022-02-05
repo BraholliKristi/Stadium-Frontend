@@ -3,29 +3,33 @@ import Image from "next/image";
 import Breadcrums from "../BreadCrums";
 import Main from "./Main";
 import Footer from "../components/Footer";
-import {fetchAvailableSeats, fetchEvent} from "../../lib/api";
+import fetchZones, {fetchAvailableSeats, fetchEvent} from "../../lib/api";
 
-function Details({data, seatsAvailable}){
+function Details({data, seatsAvailable,id,Zones}){
     return(
         <>
             <NavBar/>
             <Image src={"/img/"+data[0].carousel_image_path} width={1920} height={400}/>
             <Breadcrums/>
-            <Main data={data} AvailableSeats={seatsAvailable}/>
+            <Main data={data} eventId={id} Zones={Zones} AvailableSeats={seatsAvailable}/>
             <Footer/>
         </>
     )
 }
 
 export async function getServerSideProps(context) {
-    console.log(context.query.id);
+
     let id=context.query.id;
     const data=await fetchEvent(id);
     const seatsAvailable=await fetchAvailableSeats(id);
+    const Zones=await fetchZones();
+    console.log(Zones.length);
     return {
         props: {
             data,
-            seatsAvailable
+            id,
+            seatsAvailable,
+            Zones
         }
     };
 }
