@@ -8,7 +8,7 @@ export default function Main(props) {
         <>
             <div className={"grid grid-cols-12"}>
                 <h2 className={"col-span-12 animate-pulse text-3xl font-bold pt-10 text-center"}>
-                    Leatest Events
+                    Latest Events
                 </h2>
                 {props.data.map((event) => {
                     return (

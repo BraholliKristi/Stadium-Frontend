@@ -58,18 +58,18 @@ export default function Modal(props) {
                                     <div className={Name=="" ? "hidden" : "mb-6 w-96"}>
                                         <label htmlFor="username-success"
                                                className="block mb-2 text-sm font-medium text-green-700 dark:text-green-500">NID</label>
-                                        <input required={true}  onChange={(e) => {
+                                        <input required={true} maxLength={10} onChange={(e) => {
                                             setNID(e.target.value);
                                             console.log(NID);
                                         }} type="text" id="username-success"
                                                className=" border border-green-500 text-green-900 placeholder-green-700 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-green-100 dark:border-green-400"
-                                               placeholder="XXXX-XXXX-XXXXXX-XXXXX"/>
+                                               placeholder="XXXXXXXXXX"/>
 
                                     </div>
                                     <div className={(NID=="") ? "hidden" : "mb-6 w-96"}>
                                         <label htmlFor="username-success"
                                                className="block mb-2 text-sm font-medium text-green-700 dark:text-green-500">Phone</label>
-                                        <input required={true}  onChange={(e) => {
+                                        <input required={true} maxLength={11} onChange={(e) => {
                                             setPhone(e.target.value);
                                             console.log(Phone)
                                         }} type="text" id="username-success"

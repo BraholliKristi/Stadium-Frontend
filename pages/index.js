@@ -13,7 +13,7 @@ console.log(props.data.length)
       <>
         <NavBar/>
           <VideoHeader url={"/video/bckIntro.mp4"} title={"WELCOME TO AIR ALBANIA"}/>
-          <Breadcrums Title={"Leatest Events"}/>
+          <Breadcrums Title={"Latest Events"}/>
           <Main data={props.data} />
         <Footer/>
       </>
