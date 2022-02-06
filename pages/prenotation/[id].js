@@ -6,8 +6,8 @@ import Main from "../components/Main";
 import Footer from "../components/Footer";
 import {fetchAvaliableSeats, fetchEvent} from "../../lib/api";
 
-function Details({data/*, seatsAvaliable*/}){
-    return(
+function Details({data/*, seatsAvaliable*/}) {
+    return (
         <>
             <NavBar/>
             <Image src={img1} width={1920}/>
@@ -20,9 +20,9 @@ function Details({data/*, seatsAvaliable*/}){
 
 export async function getServerSideProps(context) {
     console.log(context.query.id);
-    let id=context.query.id;
-    const data=await fetchEvent(id);
-    const seatsAvaliable=await fetchAvaliableSeats(id);
+    let id = context.query.id;
+    const data = await fetchEvent(id);
+    const seatsAvaliable = await fetchAvaliableSeats(id);
     console.log(seatsAvaliable);
     return {
         props: {
@@ -30,5 +30,6 @@ export async function getServerSideProps(context) {
             //seatsAvaliable
         }
     };
-    }
+}
+
 export default Details;

@@ -5,11 +5,11 @@ import Main from "./Main";
 import Footer from "../components/Footer";
 import fetchZones, {fetchAvailableSeats, fetchEvent} from "../../lib/api";
 
-function Details({data, seatsAvailable,id,Zones}){
-    return(
+function Details({data, seatsAvailable, id, Zones}) {
+    return (
         <>
             <NavBar/>
-            <Image src={"/img/"+data[0].carousel_image_path} width={1920} height={900}/>
+            <Image src={"/img/" + data[0].carousel_image_path} width={1920} height={900}/>
             <Breadcrums/>
             <Main data={data} eventId={id} Zones={Zones} AvailableSeats={seatsAvailable}/>
             <Footer/>
@@ -19,10 +19,10 @@ function Details({data, seatsAvailable,id,Zones}){
 
 export async function getServerSideProps(context) {
 
-    let id=context.query.id;
-    const data=await fetchEvent(id);
-    const seatsAvailable=await fetchAvailableSeats(id);
-    const Zones=await fetchZones();
+    let id = context.query.id;
+    const data = await fetchEvent(id);
+    const seatsAvailable = await fetchAvailableSeats(id);
+    const Zones = await fetchZones();
     console.log(Zones.length);
     return {
         props: {
@@ -33,4 +33,5 @@ export async function getServerSideProps(context) {
         }
     };
 }
+
 export default Details;
