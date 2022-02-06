@@ -1,12 +1,9 @@
 import Image from "next/image";
-import img1 from "../../public/img/bck1.jpg";
-import Link from "next/link";
-import RoomType from "./RoomType";
 import CarouselSlide from "../components/carouselSlider";
 import {useState} from "react";
 import 'react-modern-calendar-datepicker/lib/DatePicker.css';
-import DatePicker from 'react-modern-calendar-datepicker';
 import {fetchRoomById} from "../../lib/api";
+import Modal from "../components/Payment/Modal";
 
 export default function ChosenRoom(props) {
     let ImagesForType = [];
@@ -19,21 +16,26 @@ export default function ChosenRoom(props) {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
     const [roomId, setroomId] = useState();
-    const [currentRoomImg,setcurrentRoomImg]=useState(null);
-    async function SaveRoomId(id){
-        alert("Helloss")
+    const [currentRoomImg, setcurrentRoomImg] = useState(null);
+    const [ReservationMessage, setReservationMessage] = useState("");
+
+    async function SaveRoomId(id) {
         setroomId(id);
     }
+
     async function HandleRoom(id) {
         setRoomSelected(id);
         console.log((await fetchRoomById(id))['image_path']);
         setcurrentRoomImg((await fetchRoomById(id))['image_path']);
     }
-    async function submitReservation(RoomId, StartDate,EndDate) {
-        alert("Hello")
+
+    async function submitReservation(Name, NID, Phone) {
+        console.log(JSON.stringify({
+            room_id: roomId, start_date: startDate, end_date: endDate, name: Name, NID: NID, phone: Phone
+        }));
         const response = await fetch('http://dev-local.airalbania.com/api/hotel/reserve', {
             method: 'POST', body: JSON.stringify({
-                room_id: RoomId,  start_date:StartDate, end_date: EndDate,
+                room_id: RoomId, start_date: StartDate, end_date: EndDate, name: Name, NID: NID, phone: Phone
             }), headers: {
                 'Content-Type': 'application/json',
             },
@@ -41,7 +43,9 @@ export default function ChosenRoom(props) {
         console.log(response)
         const data = await response.json();
         alert(data.message);
+        setReservationMessage(data.message);
     }
+
     async function HandleStartingDate(date) {
         console.log(date);
         setStartDate(date)
@@ -80,13 +84,13 @@ export default function ChosenRoom(props) {
                     </div>
                     <div className={"p-2"}>
                         Start Date:
-                        <input onChange={(e) => {
+                        <input required={true} onChange={(e) => {
                             HandleStartingDate(e.target.value);
                         }} type={"date"}/>
                     </div>
                     <div className={"p-2"}>
                         End Date:
-                        <input onChange={(e) => {
+                        <input required={true} onChange={(e) => {
                             HandleEndDate(e.target.value);
                         }} type={"date"}/>
                     </div>
@@ -99,18 +103,13 @@ export default function ChosenRoom(props) {
                     </p>
                 </div>
                 <div className={"flex col-start-4 col-span-1 grid grid-cols-1 justify-end items-end"}>
-
-                    <div className={"flex justify-end text-end"}>
-                        <button onClick={(e) => {
-                            submitReservation(roomSelected, startDate,endDate);
-                        }}
-                            className="bg-red-900 flex group hover:bg-red-800 text-white font-bold py-2 px-4 border-b-4 border-red-400 hover:border-red-500 rounded">
-                            Check In
-                        </button>
+                    <div className={"flex justify-center text-end"}>
+                        <Modal onClick={submitReservation} reservationMessage={ReservationMessage} roomId={roomSelected}
+                               startDate={startDate} endDate={endDate}/>
                     </div>
                 </div>
                 <div className={(roomSelected == "") ? "hidden" : " col-span-4 h-full py-10 px-2 justify-center flex"}>
-                    <Image src={"/img/" +currentRoomImg} width={800} height={500}></Image>
+                    <Image src={"/img/" + currentRoomImg} width={800} height={500}></Image>
                 </div>
             </div>
         </div>
