@@ -3,9 +3,9 @@ import React, {useState} from "react";
 export default function Modal(props) {
     const [showModal, setShowModal] = React.useState(false);
     const [message,setMessage]=useState("Reservation");
-    const [Name,setName]=useState(null);
-    const [NID,setNID]=useState(null);
-    const [Phone,setPhone]=useState(null);
+    const [Name,setName]=useState("");
+    const [NID,setNID]=useState("");
+    const [Phone,setPhone]=useState("");
     return (
         <div>
             <button
@@ -26,7 +26,7 @@ export default function Modal(props) {
                                 {/*header*/}
                                 <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
                                     <h3 className="text-3xl font-semibold">
-                                         {message}
+                                        {props.message}
                                     </h3>
                                     <button
                                         className="p-1 ml-auto bg-transparent border-0 text-black opacity-5 float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
@@ -55,7 +55,7 @@ export default function Modal(props) {
 
                                     </div>
                                     </p>
-                                    <div className="mb-6 w-96">
+                                    <div className={Name=="" ? "hidden" : "mb-6 w-96"}>
                                         <label htmlFor="username-success"
                                                className="block mb-2 text-sm font-medium text-green-700 dark:text-green-500">NID</label>
                                         <input required={true}  onChange={(e) => {
@@ -66,7 +66,7 @@ export default function Modal(props) {
                                                placeholder="XXXX-XXXX-XXXXXX-XXXXX"/>
 
                                     </div>
-                                    <div className="mb-6 w-96">
+                                    <div className={(NID=="") ? "hidden" : "mb-6 w-96"}>
                                         <label htmlFor="username-success"
                                                className="block mb-2 text-sm font-medium text-green-700 dark:text-green-500">Phone</label>
                                         <input required={true}  onChange={(e) => {
@@ -87,13 +87,13 @@ export default function Modal(props) {
                                     >
                                         Close
                                     </button>
-                                    <button onClick={(e) => {
+                                    <button className={Phone=="" ? "hidden" : "bg-red-900 flex group hover:bg-red-800 text-white font-bold py-2 px-4 border-b-4 border-red-400 hover:border-red-500 rounded"} onClick={(e) => {
 
                                        props.onClick(Name,NID,Phone);
-                                        setMessage(props.reservationMessage);
+                                        setMessage(props.message);
                                     }}
-                                            className="bg-red-900 flex group hover:bg-red-800 text-white font-bold py-2 px-4 border-b-4 border-red-400 hover:border-red-500 rounded">
-                                        Check In
+                                            >
+                                        Confirm
                                     </button>
                                 </div>
                             </div>

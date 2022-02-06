@@ -3,12 +3,14 @@ import fusha from "../../public/img/fusha.jpg";
 import Link from "next/link";
 import {useState} from "react";
 import {fetchAvailableSeats} from "../../lib/api";
+import Modal from "../components/Payment/Modal";
 
 export default function ChosenEvent(props) {
     const Zones = props.Zones;
     const [SelectedZone, setSelectedZone] = useState(null);
     const [SelectedSeat, setSelectedSeat] = useState(null);
     const [AvaliableSeats, setAvaliableSeats] = useState([]);
+    const [ReservationMsg,setReservationMsg]=useState("Reservation");
     let seatId;
 
     async function HandleChooseZone(zone) {
@@ -23,18 +25,20 @@ export default function ChosenEvent(props) {
         setSelectedSeat(seat);
     }
 
-    async function submitReservation(ZoneId, SeatId) {
-        console.log(ZoneId, SeatId)
+    async function submitReservation(Name, NID, Phone) {
+        console.log(JSON.stringify({
+            date: props.data.date, seat_id: parseInt(SelectedSeat), price: 1000, event_id:props.data.id,
+        }))
         const response = await fetch('http://dev-local.airalbania.com/api/ticket/reserve', {
             method: 'POST', body: JSON.stringify({
-                date: "2022-02-05", seat_id: SeatId, price: 1000, event_id: 9,
+                date: props.data.date, seat_id: parseInt(SelectedSeat), price: 1000, event_id: props.data.id,
             }), headers: {
                 'Content-Type': 'application/json',
             },
         })
         console.log(response)
         const data = await response.json();
-        alert(data.message);
+        setReservationMsg(data.message);
     }
 
     return (<div className={"col-span-12 p-10"}>
@@ -86,12 +90,7 @@ export default function ChosenEvent(props) {
                     </select>
                 </div>
                 <div className={SelectedZone == null ? "hidden" : "flex justify-end text-end"}>
-                    <button onClick={(e) => {
-                        submitReservation(SelectedZone, SelectedSeat);
-                    }}
-                            className="bg-red-900 flex group hover:bg-red-800 text-white font-bold py-2 px-4 border-b-4 border-red-400 hover:border-red-500 rounded">
-                        Check In
-                    </button>
+                    <Modal onClick={submitReservation} message={ReservationMsg}/>
                 </div>
             </div>
         </div>

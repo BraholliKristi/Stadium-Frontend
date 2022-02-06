@@ -4,7 +4,7 @@ import {useState} from "react";
 import 'react-modern-calendar-datepicker/lib/DatePicker.css';
 import {fetchRoomById} from "../../lib/api";
 import Modal from "../components/Payment/Modal";
-
+import moment from "moment";
 export default function ChosenRoom(props) {
     let ImagesForType = [];
     props.data.map((room) => {
@@ -17,13 +17,13 @@ export default function ChosenRoom(props) {
     const [endDate, setEndDate] = useState(new Date());
     const [roomId, setroomId] = useState();
     const [currentRoomImg, setcurrentRoomImg] = useState(null);
-    const [ReservationMessage, setReservationMessage] = useState("");
-
+    const [ReservationMsg,setReservationMsg]=useState("Reservation");
     async function SaveRoomId(id) {
         setroomId(id);
     }
 
     async function HandleRoom(id) {
+        console.log(id);
         setRoomSelected(id);
         console.log((await fetchRoomById(id))['image_path']);
         setcurrentRoomImg((await fetchRoomById(id))['image_path']);
@@ -31,19 +31,19 @@ export default function ChosenRoom(props) {
 
     async function submitReservation(Name, NID, Phone) {
         console.log(JSON.stringify({
-            room_id: roomId, start_date: startDate, end_date: endDate, name: Name, NID: NID, phone: Phone
+            room_id:roomSelected, start_date: startDate, end_date: endDate, name: Name, NID: NID, phone: Phone
         }));
+        console.log(roomSelected);
         const response = await fetch('http://dev-local.airalbania.com/api/hotel/reserve', {
             method: 'POST', body: JSON.stringify({
-                room_id: RoomId, start_date: StartDate, end_date: EndDate, name: Name, NID: NID, phone: Phone
+                room_id: roomSelected, start_date: startDate, end_date: endDate, name: Name, NID: NID, phone: Phone
             }), headers: {
                 'Content-Type': 'application/json',
             },
         })
         console.log(response)
         const data = await response.json();
-        alert(data.message);
-        setReservationMessage(data.message);
+        setReservationMsg(data.message)
     }
 
     async function HandleStartingDate(date) {
@@ -70,11 +70,12 @@ export default function ChosenRoom(props) {
                         <select onChange={(e) => {
                             HandleRoom(e.target.value);
                         }} className={"mx-auto h-10 w-full text-xl border p-1"}>
+                            <option disabled={true} selected={true}>
+                                --:--
+                            </option>
                             {props.data.map((room, index) => {
                                 return (
-                                    <option onSelect={(e) => {
-                                        SaveRoomId(room.room_id)
-                                    }} key={index} accessKey={index} value={room.id}>
+                                    <option key={index} accessKey={index} value={room.id}>
                                         {room.name}
                                     </option>
                                 );
@@ -82,17 +83,17 @@ export default function ChosenRoom(props) {
 
                         </select>
                     </div>
-                    <div className={"p-2"}>
+                    <div className={roomSelected==""? "hidden":"p-2"}>
                         Start Date:
                         <input required={true} onChange={(e) => {
                             HandleStartingDate(e.target.value);
-                        }} type={"date"}/>
+                        }} type={"date"} default={startDate+""} min={ getCurrentDate}/>
                     </div>
-                    <div className={"p-2"}>
+                    <div className={roomSelected==""? "hidden":"p-2"}>
                         End Date:
                         <input required={true} onChange={(e) => {
-                            HandleEndDate(e.target.value);
-                        }} type={"date"}/>
+                            HandleEndDate(e.target.value) ;
+                        }} type={"date"} default={startDate+""} min={ getCurrentDate}/>
                     </div>
                 </div>
                 <div
@@ -104,7 +105,7 @@ export default function ChosenRoom(props) {
                 </div>
                 <div className={"flex col-start-4 col-span-1 grid grid-cols-1 justify-end items-end"}>
                     <div className={"flex justify-center text-end"}>
-                        <Modal onClick={submitReservation} reservationMessage={ReservationMessage} roomId={roomSelected}
+                        <Modal onClick={submitReservation} message={ReservationMsg} roomId={roomSelected}
                                startDate={startDate} endDate={endDate}/>
                     </div>
                 </div>
@@ -114,6 +115,15 @@ export default function ChosenRoom(props) {
             </div>
         </div>
     )
+}
+export function getCurrentDate(separator='-'){
+
+    let newDate = new Date()
+    let date = newDate.getDate();
+    let month = newDate.getMonth() + 1;
+    let year = newDate.getFullYear();
+
+    return `${date}${separator}${month<10?`0${month}`:`${month}`}${separator}${year}`
 }
 
 
